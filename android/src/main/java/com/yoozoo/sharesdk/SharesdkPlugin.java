@@ -564,7 +564,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                    HashMap<String, Object> userMap = new HashMap<>();
+                    final HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
                     if (platform.getDb().exportData() != null) {
@@ -583,7 +583,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
 
                 @Override
                 public void onError(Platform platform, int i, Throwable throwable) {
-                    HashMap<String, Object> map = new HashMap<>();
+                    final HashMap<String, Object> map = new HashMap<>();
                     map.put("state", 2);
 
                     HashMap<String, Object> errorMap = new HashMap<>();
@@ -608,7 +608,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
 
                 @Override
                 public void onCancel(Platform platform, int i) {
-                    Map<String, Object> map = new HashMap<>();
+                    final Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
