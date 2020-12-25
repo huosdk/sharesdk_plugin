@@ -314,8 +314,12 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     errorMap.put("error", String.valueOf(throwable));
                 }
                 map.put("error", errorMap);
-
-                result.success(map);
+                Log.d("onError", "shareWithArgs:");
+                try {
+                    result.success(map);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
