@@ -302,7 +302,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
 
             @Override
             public void onError(Platform platform, int i, Throwable throwable) {
-                Map<String, Object> map = new HashMap<>();
+                final Map<String, Object> map = new HashMap<>();
                 map.put("state", 2);
 
                 HashMap<String, Object> errorMap = new HashMap<>();
