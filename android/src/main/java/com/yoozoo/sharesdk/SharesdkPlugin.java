@@ -104,7 +104,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     private void getVersion(MethodCall call, Result result) {
         Map<String, Object> map = new HashMap<>();
         map.put("版本号", "3.6.1");
-        result.success(map);
+        callbackMainThread(result, map);
     }
 
     /** 分享 **/
@@ -297,7 +297,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 1);
-                result.success(map);
+                callbackMainThread(result, map);
             }
 
             @Override
@@ -314,24 +314,14 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     errorMap.put("error", String.valueOf(throwable));
                 }
                 map.put("error", errorMap);
-                try {
-                    Handler mainHandler = new Handler(Looper.getMainLooper());
-                    mainHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            result.success(map);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                callbackMainThread(result, map);
             }
 
             @Override
             public void onCancel(Platform platform, int i) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 3);
-                result.success(map);
+                callbackMainThread(result, map);
             }
         });
         platform.share(shareParams);
@@ -412,7 +402,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 1);
-                    result.success(map);
+                    callbackMainThread(result, map);
                 }
 
                 @Override
@@ -429,15 +419,14 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                         errorMap.put("error", String.valueOf(throwable));
                     }
                     map.put("error", errorMap);
-                    result.success(map);
+                    callbackMainThread(result, map);
                 }
 
                 @Override
                 public void onCancel(Platform platform, int i) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
-                    result.success(map);
-                    //result.error(null, null, map);
+                    callbackMainThread(result, map);
                 }
             });
             //platform.SSOSetting(true);
@@ -456,7 +445,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 Log.e("QQQ", " 我已经取消了授权 ");
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 1);
-                result.success(map);
+                callbackMainThread(result, map);
             } else {
                 Log.e("QQQ", " 您还没有授权，请先授权 ");
                 Map<String, Object> map = new HashMap<>();
@@ -464,7 +453,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 HashMap<String, Object> errorMap = new HashMap<>();
                 errorMap.put("error", "您还没有授权，请先授权");
                 map.put("error", errorMap);
-                result.success(map);
+                callbackMainThread(result, map);
             }
         }
     }
@@ -480,14 +469,14 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 HashMap<String, Object> reMap = new HashMap<>();
                 reMap.put("true", "授权了");
                 map.put("user", reMap);
-                result.success(map);
+                callbackMainThread(result, map);
             } else {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 2);
                 HashMap<String, Object> reMap = new HashMap<>();
                 reMap.put("false", "没有授权");
                 map.put("error", reMap);
-                result.success(map);
+                callbackMainThread(result, map);
             }
         } else {
             HashMap<String, Object> map = new HashMap<>();
@@ -495,7 +484,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             HashMap<String, Object> errorMap = new HashMap<>();
             errorMap.put("error", "平台为空");
             map.put("error", errorMap);
-            result.success(map);
+            callbackMainThread(result, map);
         }
     }
 
@@ -573,7 +562,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                    final HashMap<String, Object> userMap = new HashMap<>();
+                    final Map<String, Object> userMap = new HashMap<>();
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
                     if (platform.getDb().exportData() != null) {
@@ -581,13 +570,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     }
                     //新增token
                     hashMap.put("token", platform.getDb().getToken());
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            result.success(userMap);
-                        }
-                    });
+                    callbackMainThread(result, hashMap);
                 }
 
                 @Override
@@ -605,28 +588,14 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                         errorMap.put("error", String.valueOf(throwable));
                     }
                     map.put("error", errorMap);
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            result.success(map);
-                        }
-                    });
-                    //result.error(null, null, map);
+                    callbackMainThread(result, map);
                 }
 
                 @Override
                 public void onCancel(Platform platform, int i) {
                     final Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            result.success(map);
-                        }
-                    });
-                    //result.error(null, null, map);
+                    callbackMainThread(result, map);
                 }
             });
         }
@@ -652,5 +621,15 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         } else {
             Log.e("FFF", " ===== FlutterEventChannel.eventSink 为空 需要检查一下 ===== ");
         }
+    }
+
+    private void callbackMainThread(final Result result, final Map<String, Object> map) {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                result.success(map);
+            }
+        });
     }
 }
