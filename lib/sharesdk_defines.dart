@@ -8,14 +8,14 @@ class SSDKError extends Error {
       : code = rawData != null ? rawData["code"] : 0,
         userInfo = rawData != null ? rawData["userInfo"] : {},
         super();
-  final Map rawData;
-  final int code;
-  final Map userInfo;
+  final Map? rawData;
+  final int? code;
+  final Map? userInfo;
 }
 
 /// model for method
 class ShareSDKMethod {
-  ShareSDKMethod({@required this.name, @required this.id})
+  ShareSDKMethod({required this.name, required this.id})
       : assert(name != null && id != null),
         super();
   final String name;
@@ -48,10 +48,10 @@ class ShareSDKMethods {
 }
 
 class ShareSDKPlatform {
-  ShareSDKPlatform({@required this.id, @required this.name})
+  ShareSDKPlatform({required this.id, required this.name})
       : assert(id != null && name != null),
         super();
-  final int id;
+  final int? id;
   final String name;
 }
 
@@ -158,7 +158,7 @@ class ShareSDKPlatforms {
 /// model for contentType
 class SSDKContentType {
   SSDKContentType({this.value}) : super();
-  final int value;
+  final int? value;
 }
 
 /// supported share content types

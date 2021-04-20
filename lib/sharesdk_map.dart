@@ -145,7 +145,7 @@ class SSDKMap {
     params[kWeChatFile] = sourceFileData;
     params[kEmoticon] = emoticonData;
 
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -174,7 +174,7 @@ class SSDKMap {
     params[kWXMPWithTicket] = withShareTicket;
     params[kImageUrlAndroid] = imageUrlAndroid;
 
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -214,7 +214,7 @@ class SSDKMap {
     params[ksite] = siteAndroid;
     params[ksiteUrl] = siteUrlAndroid;
 
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -247,7 +247,7 @@ class SSDKMap {
     params[kImagePathAndroid] = imageUrl;
     params[kImageUrlAndroid] = imagePath;
 
-    int id = ShareSDKPlatforms.sina.id;
+    int? id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
   }
 
@@ -273,7 +273,7 @@ class SSDKMap {
     params[kimage_y] = imageY;
     params[kType] = SSDKContentTypes.webpage.value;
 
-    int id = ShareSDKPlatforms.sina.id;
+    int? id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
   }
 
@@ -289,7 +289,7 @@ class SSDKMap {
     params[kLong] = longitude;
     params[kVideo] = video;
 
-    int id = ShareSDKPlatforms.twitter.id;
+    int? id = ShareSDKPlatforms.twitter.id;
     map["@platform($id)"] = params;
   }
 
@@ -321,7 +321,7 @@ class SSDKMap {
     params[kFacebookHashtag] = hasTag;
     params[kFacebookQuote] = quote;
 
-    int id = ShareSDKPlatforms.facebook.id;
+    int? id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
   }
 }

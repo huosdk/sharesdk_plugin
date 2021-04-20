@@ -10,19 +10,19 @@ class ShareSDK {
   static const EventChannel java_to_flutter =
       const EventChannel("JAVA_TO_FLUTTER");
 
-  static Future<dynamic> listenNativeEvent() {
+  static Future<dynamic>? listenNativeEvent() {
     java_to_flutter
         .receiveBroadcastStream()
         .listen(_onEvent, onError: _onError);
     return null;
   }
 
-  static Future<dynamic> _onEvent(Object event) {
+  static Future<dynamic>? _onEvent(Object? event) {
     print("onEvent: $event ");
     return null;
   }
 
-  static Future<dynamic> _onError(Object error) {
+  static Future<dynamic>? _onError(Object error) {
     print(error);
     return null;
   }
@@ -38,7 +38,7 @@ class ShareSDK {
 
   /// 分享
   static Future<dynamic> share(ShareSDKPlatform platform, SSDKMap params,
-      Function(SSDKResponseState, Map, Map, SSDKError) result) {
+      Function(SSDKResponseState, Map?, Map?, SSDKError) result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.share.name, args);
@@ -54,7 +54,7 @@ class ShareSDK {
 
   /// 授权
   static Future<dynamic> auth(ShareSDKPlatform platform, Map settings,
-      Function(SSDKResponseState, Map, SSDKError) result) {
+      Function(SSDKResponseState, Map?, SSDKError) result) {
     Map args = {"platform": platform.id, "settings": settings};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.auth.name, args);
@@ -71,7 +71,7 @@ class ShareSDK {
 
   /// 判断是否授权
   static Future<dynamic> hasAuthed(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError) result) {
+      Function(SSDKResponseState, Map?, SSDKError) result) {
     Future<dynamic> callback = _channel.invokeMethod(
         ShareSDKMethods.hasAuthed.name, platform.id);
     callback.then((dynamic response) {
@@ -80,12 +80,12 @@ class ShareSDK {
                 SSDKError(rawData: response["error"]));
       }
     });
-
+    return Future.value(null);
   }
 
   /// 取消授权
   static Future<dynamic> cancelAuth(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError) result) {
+      Function(SSDKResponseState, Map?, SSDKError) result) {
     Future<dynamic> callback = _channel.invokeMethod(
         ShareSDKMethods.cancelAuth.name, platform.id);
     callback.then((dynamic response) {
@@ -94,12 +94,12 @@ class ShareSDK {
               SSDKError(rawData: response["error"]));
       }
     });
-
+    return Future.value(null);
   }
 
   /// 获取用户信息
   static Future<dynamic> getUserInfo(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError) result) {
+      Function(SSDKResponseState, Map?, SSDKError) result) {
     Map args = {"platform": platform.id};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.getUserInfo.name, args);
@@ -117,11 +117,11 @@ class ShareSDK {
   static Future<dynamic> showMenu(
       List<ShareSDKPlatform> platforms,
       SSDKMap params,
-      Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
+      Function(SSDKResponseState, ShareSDKPlatform, Map?, Map?, SSDKError)
           result) {
-    List types;
+    List? types;
     if (platforms != null) {
-      Iterable<int> ids = platforms.map((ShareSDKPlatform item) => item.id);
+      Iterable<int?> ids = platforms.map((ShareSDKPlatform item) => item.id);
       types = List.from(ids);
     }
 
@@ -146,7 +146,7 @@ class ShareSDK {
   static Future<dynamic> showEditor(
       ShareSDKPlatform platform,
       SSDKMap params,
-      Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
+      Function(SSDKResponseState, ShareSDKPlatform, Map?, Map?, SSDKError)
           result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
