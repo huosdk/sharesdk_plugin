@@ -94,17 +94,17 @@ class SSDKMap {
 
   /// Set common share parameters
   void setGeneral(
-      String title,
-      String text,
+      String? title,
+      String? text,
       dynamic images,
-      String imageUrlAndroid,
-      String imagePathAndroid,
-      String url,
-      String titleUrlAndroid,
-      String musicUrlAndroid,
-      String videoUrlAndroid,
-      SSDKContentType contentType) {
-    map[kType] = contentType.value;
+      String? imageUrlAndroid,
+      String? imagePathAndroid,
+      String? url,
+      String? titleUrlAndroid,
+      String? musicUrlAndroid,
+      String? videoUrlAndroid,
+      SSDKContentType? contentType) {
+    map[kType] = contentType?.value;
     map[kText] = text;
     map[kTitle] = title;
     map[kImages] = images;
@@ -118,21 +118,21 @@ class SSDKMap {
 
   /// Set wechat platform share parameters
   void setWechat(
-      String text,
-      String title,
-      String url,
-      String thumbImage,
+      String? text,
+      String? title,
+      String? url,
+      String? thumbImage,
       dynamic images,
-      String musicFileURL,
-      String extInfo,
-      String fileData,
-      String emoticonData,
-      String fileExtension,
-      String sourceFileData,
-      SSDKContentType contentType,
+      String? musicFileURL,
+      String? extInfo,
+      String? fileData,
+      String? emoticonData,
+      String? fileExtension,
+      String? sourceFileData,
+      SSDKContentType? contentType,
       ShareSDKPlatform subPlatform) {
     Map params = {};
-    params[kType] = contentType.value;
+    params[kType] = contentType?.value;
     params[kText] = text;
     params[kTitle] = title;
     params[kUrl] = url;
@@ -151,16 +151,16 @@ class SSDKMap {
 
   /// Set wechat mini program share parameters
   void setWeChatMiniProgram(
-      String title,
-      String desc,
-      String webUrl,
-      String path,
-      String thumbImage,
-      String hdThumbImage,
-      String imageUrlAndroid,
-      String userName,
-      bool withShareTicket,
-      int miniProgramType,
+      String? title,
+      String? desc,
+      String? webUrl,
+      String? path,
+      String? thumbImage,
+      String? hdThumbImage,
+      String? imageUrlAndroid,
+      String? userName,
+      bool? withShareTicket,
+      int? miniProgramType,
       ShareSDKPlatform subPlatform) {
     Map params = {};
     params[kType] = SSDKContentTypes.miniProgram.value;
@@ -180,25 +180,25 @@ class SSDKMap {
 
   /// Set QQ platform share parameters
   void setQQ(
-      String text,
-      String title,
-      String url,
-      String audio,
-      String video,
-      String musicUrl,
-      String videoUrl,
-      String thumbImage,
+      String? text,
+      String? title,
+      String? url,
+      String? audio,
+      String? video,
+      String? musicUrl,
+      String? videoUrl,
+      String? thumbImage,
       dynamic images,
-      String imageUrlAndroid,
-      String imagePathAndroid,
-      String titleUrlAndroid,
-      String siteAndroid,
-      String siteUrlAndroid,
-      SSDKContentType type,
+      String? imageUrlAndroid,
+      String? imagePathAndroid,
+      String? titleUrlAndroid,
+      String? siteAndroid,
+      String? siteUrlAndroid,
+      SSDKContentType? type,
       ShareSDKPlatform subPlatform) {
     Map params = {};
 
-    params[kType] = type.value;
+    params[kType] = type?.value;
     params[kText] = text;
     params[kTitle] = title;
     params[kTitleUrlAndroid] = titleUrlAndroid;
@@ -220,21 +220,21 @@ class SSDKMap {
 
   /// Set sina platform share parameters
   void setSina(
-      String text,
-      String title,
+      String? text,
+      String? title,
       images,
-      String video,
-      String url,
-      double latitude,
-      double longitude,
-      String objectId,
-      bool isStory,
-      String imageUrl,
-      String imagePath,
-      SSDKContentType type) {
+      String? video,
+      String? url,
+      double? latitude,
+      double? longitude,
+      String? objectId,
+      bool? isStory,
+      String? imageUrl,
+      String? imagePath,
+      SSDKContentType? type) {
     Map params = {};
 
-    params[kType] = type.value;
+    params[kType] = type?.value;
     params[kText] = text;
     params[kImages] = images;
     params[kTitle] = title;
@@ -253,13 +253,13 @@ class SSDKMap {
 
   void setSinaLinkCard(
     // linkCard
-    String text,
-    String title,
-    String url,
-    String sinaSummary,
-    String imageUrl,
-    String imageX,
-    String imageY,
+    String? text,
+    String? title,
+    String? url,
+    String? sinaSummary,
+    String? imageUrl,
+    String? imageX,
+    String? imageY,
   ) {
     Map params = {};
     params[kText] = text;
@@ -278,12 +278,12 @@ class SSDKMap {
   }
 
   /// Set twitter platform share parameters
-  void setTwitter(String text, images, String video, double latitude,
-      double longitude, SSDKContentType type) {
+  void setTwitter(String? text, images, String? video, double? latitude,
+      double? longitude, SSDKContentType? type) {
     Map params = {};
 
     params[kText] = text;
-    params[kType] = type.value;
+    params[kType] = type?.value;
     params[kImages] = images;
     params[kLat] = latitude;
     params[kLong] = longitude;
@@ -295,17 +295,17 @@ class SSDKMap {
 
   /// Set facebook platform share parameters
   void setFacebook(
-      String text,
+      String? text,
       images,
       String url,
-      String urlTitle,
-      String urlName,
-      String attachementUrl,
-      String hasTag,
-      String quote,
-      SSDKContentType type) {
+      String? urlTitle,
+      String? urlName,
+      String? attachementUrl,
+      String? hasTag,
+      String? quote,
+      SSDKContentType? type) {
     Map params = {};
-    params[kType] = type.value;
+    params[kType] = type?.value;
     params[kText] = text;
     params[kImages] = images;
 

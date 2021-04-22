@@ -4,8 +4,8 @@ import 'package:sharesdk/sharesdk.dart';
 import 'dart:io';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  HomePage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _HomePageState createState() => new _HomePageState();
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
 
     ShareSDK.share(
         ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
-        Map userdata, Map contentEntity, SSDKError error) {
+        Map? userdata, Map? contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
   void authToWechat(BuildContext context) {
     ShareSDK.auth(
         ShareSDKPlatforms.wechatSession, null, (SSDKResponseState state,
-        Map user, SSDKError error) {
+        Map? user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
@@ -66,21 +66,21 @@ class _HomePageState extends State<HomePage> {
   void getUserInfoToWechat(BuildContext context) {
     ShareSDK.getUserInfo(
         ShareSDKPlatforms.wechatSession, (SSDKResponseState state,
-        Map user, SSDKError error) {
+        Map? user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
 
   void cancelAuth(BuildContext context) {
    ShareSDK.cancelAuth(ShareSDKPlatforms.wechatSession,
-      (SSDKResponseState state, Map user, SSDKError error) {
+      (SSDKResponseState state, Map? user, SSDKError error) {
         showAlert(state, error.rawData, context);
       });
   }
 
   void hasAuthed(BuildContext context) {
     ShareSDK.hasAuthed(ShareSDKPlatforms.wechatSession,
-    (SSDKResponseState state, Map user, SSDKError error) {
+    (SSDKResponseState state, Map? user, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -102,14 +102,14 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.auto);
 
     ShareSDK.share(
-        ShareSDKPlatforms.sina, params, (SSDKResponseState state, Map userdata,
-        Map contentEntity, SSDKError error) {
+        ShareSDKPlatforms.sina, params, (SSDKResponseState state, Map? userdata,
+        Map? contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
 
   void authToSina(BuildContext context) {
-    ShareSDK.getUserInfo(ShareSDKPlatforms.qq, (SSDKResponseState state, Map userdata, SSDKError error) {
+    ShareSDK.getUserInfo(ShareSDKPlatforms.qq, (SSDKResponseState state, Map? userdata, SSDKError error) {
       print("--------------------------> authToSina:");
       showAlert(state, userdata, context);
     });
@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
     ShareSDK.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
-        Map userData, Map contentEntity, SSDKError error) {
+        Map? userData, Map? contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
 
     ShareSDK.showEditor(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state,
-        ShareSDKPlatform platform, Map userData, Map contentEntity,
+        ShareSDKPlatform platform, Map? userData, Map? contentEntity,
         SSDKError error) {
       showAlert(state, error.rawData, context);
     });
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
           0,
           ShareSDKPlatforms.wechatSession);
     ShareSDK.share(ShareSDKPlatforms.wechatSession, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, Map? userdata, Map? contentEntity,
             SSDKError error) {
           showAlert(state, error.rawData, context);
         });
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
           null,
           SSDKContentTypes.auto);
     ShareSDK.share(ShareSDKPlatforms.sina, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, Map? userdata, Map? contentEntity,
             SSDKError error) {
           showAlert(state, error.rawData, context);
         });
@@ -230,7 +230,7 @@ class _HomePageState extends State<HomePage> {
           "120",
           "120");
     ShareSDK.share(ShareSDKPlatforms.sina, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, Map? userdata, Map? contentEntity,
             SSDKError error) {
           showAlert(state, error.rawData, context);
         });
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
           "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg",
           null, 0.0, 0.0, SSDKContentTypes.auto);
     ShareSDK.share(ShareSDKPlatforms.twitter,
-        params, (SSDKResponseState state, Map userdata, Map contentEntity,
+        params, (SSDKResponseState state, Map? userdata, Map? contentEntity,
             SSDKError error) {
           showAlert(state, error.rawData, context);
         });
@@ -261,7 +261,7 @@ class _HomePageState extends State<HomePage> {
           "Mob官网 - 全球领先的移动开发者服务平台",
           SSDKContentTypes.webpage);
     ShareSDK.share(ShareSDKPlatforms.facebook, params, (SSDKResponseState state,
-        Map userdata, Map contentEntity, SSDKError error) {
+        Map? userdata, Map? contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -286,8 +286,8 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage,
           ShareSDKPlatforms.qq);
     ShareSDK.share(
-        ShareSDKPlatforms.qq, params, (SSDKResponseState state, Map userdata,
-        Map contentEntity, SSDKError error) {
+        ShareSDKPlatforms.qq, params, (SSDKResponseState state, Map? userdata,
+        Map? contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void showAlert(SSDKResponseState state, Map content, BuildContext context) {
+  void showAlert(SSDKResponseState state, Map? content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
     switch (state) {

@@ -53,7 +53,7 @@ class ShareSDK {
   }
 
   /// 授权
-  static Future<dynamic> auth(ShareSDKPlatform platform, Map settings,
+  static Future<dynamic> auth(ShareSDKPlatform platform, Map? settings,
       Function(SSDKResponseState, Map?, SSDKError) result) {
     Map args = {"platform": platform.id, "settings": settings};
     Future<dynamic> callback =
@@ -115,8 +115,8 @@ class ShareSDK {
 
   /// 弹出分享菜单
   static Future<dynamic> showMenu(
-      List<ShareSDKPlatform> platforms,
-      SSDKMap params,
+      List<ShareSDKPlatform>? platforms,
+      SSDKMap? params,
       Function(SSDKResponseState, ShareSDKPlatform, Map?, Map?, SSDKError)
           result) {
     List? types;
@@ -125,7 +125,7 @@ class ShareSDK {
       types = List.from(ids);
     }
 
-    Map args = {"platforms": types, "params": params.map};
+    Map args = {"platforms": types, "params": params!.map};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.showMenu.name, args);
     callback.then((dynamic response) {
